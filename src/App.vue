@@ -1,32 +1,72 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <ErrorDialog />
+    <ConfirmDialog />
+    <Loading
+      :active="$store.getters.loadingReqNumber > 0"
+      :is-full-page="true"
+    ></Loading>
+    <Header />
+    <div class="body-container">
+      <router-view />
     </div>
-    <router-view />
+    <Footer />
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import axios from "axios";
+import ErrorDialog from "@/components/common/ErrorDialog.vue";
+import ConfirmDialog from "@/components/common/ConfirmDialog.vue";
+import Loading from "vue-loading-overlay";
+import Header from "@/components/layout/Header.vue";
+import Footer from "@/components/layout/Footer.vue";
+import "vue-loading-overlay/dist/vue-loading.css";
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+export default {
+  name: "App.vue",
+  components: {
+    ErrorDialog,
+    ConfirmDialog,
+    Loading,
+    Header,
+    Footer
+  },
+  created() {
+    this.setupInterceptor();
+  },
+  methods: {
+    setupInterceptor() {
+      axios.interceptors.request.use(
+        config => {
+          console.log(config);
+          this.showLoading();
+          return config;
+        },
+        error => {
+          this.hideLoading();
+          return Promise.reject(error);
+        }
+      );
+      axios.interceptors.response.use(
+        response => {
+          console.log(response);
+          this.hideLoading();
+          return response;
+        },
+        error => {
+          console.log(error);
+          this.hideLoading();
+          this.showErrorDialog({ message: "TBD: There is an error" });
+        }
+      );
     }
   }
+};
+</script>
+
+<style lang="scss">
+.body-container {
+  min-height: calc(100vh - 128px);
 }
 </style>

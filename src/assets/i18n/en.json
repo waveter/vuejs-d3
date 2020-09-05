@@ -1,0 +1,15 @@
+{
+  "error-dialog": {
+    "title": "Error",
+    "close-button": "OK"
+  },
+  "confirm-dialog": {
+    "title": "Confirm",
+    "accept-button": "Yes",
+    "reject-button": "No"
+  },
+  "layout": {
+    "header": "Corona Live Charts",
+    "footer": "©2020 OnlineTool247"
+  }
+}
