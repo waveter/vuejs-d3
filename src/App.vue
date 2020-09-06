@@ -5,6 +5,7 @@
     <Loading
       :active="$store.getters.loadingReqNumber > 0"
       :is-full-page="true"
+      loader="dots"
     ></Loading>
     <Header />
     <div class="body-container">
@@ -68,5 +69,27 @@ export default {
 <style lang="scss">
 .body-container {
   min-height: calc(100vh - 128px);
+}
+
+.line-chart-tooltip .tooltip-inner {
+  background: transparent;
+}
+
+.line-chart-tooltip .arrow {
+  display: none !important;
+}
+
+.grid line {
+  opacity: 0.1;
+}
+
+.grid path {
+  opacity: 0.1;
+}
+
+@media only screen and (max-width: 640px) {
+  .x-axis text {
+    transform: rotate(-30deg) translate(-10px, 10px);
+  }
 }
 </style>

@@ -1,18 +1,18 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import { HOME_PAGE } from "@/constants/routing-url";
+import { CORONA_TIMELINE } from "@/constants/routing-url";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path: HOME_PAGE,
-    name: "Home",
-    component: () => import("@/views/Home")
+    path: CORONA_TIMELINE,
+    name: "corona-timeline",
+    component: () => import("@/views/CoronaTimeLine")
   },
   {
     path: "*",
-    component: () => import("@/views/Home")
+    component: () => import("@/views/CoronaTimeLine")
   }
 ];
 
