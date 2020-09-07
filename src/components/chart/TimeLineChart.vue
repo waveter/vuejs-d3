@@ -195,7 +195,7 @@ export default {
       return d3
         .scaleTime()
         .domain(this.getDateRange())
-        .rangeRound([0, this.chartWidth]);
+        .range([0, this.chartWidth]);
     },
     getScaleY() {
       if (this.isLinear) {
