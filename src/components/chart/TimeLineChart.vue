@@ -37,10 +37,10 @@
         </g>
         <g
           class="x-axis"
-          v-axis="getScaleXAxis()"
+          v-axis="getXAxis()"
           :transform="`translate(0,${chartHeight})`"
         ></g>
-        <g v-axis="getScaleYAxis()"></g>
+        <g v-axis="getYAxis()"></g>
         <g class="grid" v-axis="getGridXAxis()"></g>
         <g class="grid" v-axis="getGridYAxis()"></g>
         <svg>
@@ -210,14 +210,14 @@ export default {
           .range([this.chartHeight, 0]);
       }
     },
-    getScaleXAxis() {
+    getXAxis() {
       const scaleXAxis = d3
         .axisBottom()
         .scale(this.getScaleX())
         .tickFormat(d3.timeFormat("%Y/%m"));
       return scaleXAxis;
     },
-    getScaleYAxis() {
+    getYAxis() {
       const scaleYAxis = d3
         .axisLeft()
         .scale(this.getScaleY())
@@ -228,12 +228,12 @@ export default {
       return scaleYAxis;
     },
     getGridXAxis() {
-      return this.getScaleXAxis()
+      return this.getXAxis()
         .tickSize(this.chartHeight)
         .tickFormat("");
     },
     getGridYAxis() {
-      return this.getScaleYAxis()
+      return this.getYAxis()
         .tickSize(-this.chartWidth)
         .tickFormat("");
     }
@@ -249,7 +249,7 @@ export default {
 <style scoped>
 .line-chart {
   width: 100%;
-  height: 500px;
+  height: 400px;
 }
 
 .line-chart-container {
